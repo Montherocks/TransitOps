@@ -10,6 +10,7 @@ import com.TransitOps.backend.entity.Vehicle;
 import com.TransitOps.backend.exception.FuelLogNotFoundException;
 import com.TransitOps.backend.mapper.FuelMapper;
 import com.TransitOps.backend.repository.FuelRepository;
+import com.TransitOps.backend.repository.TripRepository;
 import com.TransitOps.backend.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;

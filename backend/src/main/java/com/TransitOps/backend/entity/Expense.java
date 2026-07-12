@@ -1,83 +1,42 @@
 package com.TransitOps.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "expenses")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Expense extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trip_id")
     private Trip trip;
 
     @Enumerated(EnumType.STRING)
-    private ExpenseType type;
+    @Column(nullable = false)
+    private ExpenseType expenseType;
 
-    private Double amount;
+    @Positive
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal amount;
 
+    @NotBlank
+    @Column(nullable = false)
     private String description;
 
-    public Expense() {
-    }
+    @Column(nullable = false)
+    private LocalDate expenseDate;
 
-    public Expense(Vehicle vehicle, Trip trip, ExpenseType type, Double amount, String description) {
-        this.vehicle = vehicle;
-        this.trip = trip;
-        this.type = type;
-        this.amount = amount;
-        this.description = description;
-    }
-
-    public Expense(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, Vehicle vehicle, Trip trip, ExpenseType type, Double amount, String description) {
-        super(id, createdAt, updatedAt);
-        this.vehicle = vehicle;
-        this.trip = trip;
-        this.type = type;
-        this.amount = amount;
-        this.description = description;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public Trip getTrip() {
-        return trip;
-    }
-
-    public void setTrip(Trip trip) {
-        this.trip = trip;
-    }
-
-    public ExpenseType getType() {
-        return type;
-    }
-
-    public void setType(ExpenseType type) {
-        this.type = type;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
