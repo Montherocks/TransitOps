@@ -146,6 +146,40 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(ExpenseNotFoundException.class)
+    public ResponseEntity<ErrorResponseDTO> expenseNotFound(ExpenseNotFoundException ex, HttpServletRequest request){
+
+        ErrorResponseDTO response = ErrorResponseDTO.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .error("NOT FOUND")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(response);
+
+    }
+
+    @ExceptionHandler(InvalidExpenseException.class)
+    public ResponseEntity<ErrorResponseDTO> invalidExpense(InvalidExpenseException ex, HttpServletRequest request){
+
+        ErrorResponseDTO response = ErrorResponseDTO.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .error("BAD REQUEST")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.badRequest()
+                .body(response);
+
+    }
+
+    
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleException(Exception ex, HttpServletRequest request){
 
