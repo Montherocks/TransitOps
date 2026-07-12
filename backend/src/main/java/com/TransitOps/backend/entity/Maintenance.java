@@ -1,86 +1,49 @@
 package com.TransitOps.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "maintenance_logs")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Maintenance extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
 
-    private String serviceType;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MaintenanceType maintenanceType;
 
+    @NotBlank(message = "Description is required")
+    @Column(nullable = false, length = 500)
     private String description;
 
-    private Double cost;
+    @NotBlank(message = "Service center is required")
+    @Column(nullable = false)
+    private String serviceCenter;
+
+    @Positive(message = "Cost must be greater than zero")
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal cost;
+
+    @Column(nullable = false)
+    private LocalDate scheduledDate;
+
+    private LocalDate completedDate;
 
     @Enumerated(EnumType.STRING)
-    private MaintenanceStatus status;
+    @Builder.Default
+    @Column(nullable = false)
+    private MaintenanceStatus status = MaintenanceStatus.OPEN;
 
-    public Maintenance() {
-    }
-
-    public Maintenance(Long id, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        super(id, createdAt, updatedAt);
-    }
-
-    public Maintenance(Vehicle vehicle, String serviceType, String description, Double cost, MaintenanceStatus status) {
-        this.vehicle = vehicle;
-        this.serviceType = serviceType;
-        this.description = description;
-        this.cost = cost;
-        this.status = status;
-    }
-
-    public Maintenance(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, Vehicle vehicle, String serviceType, String description, Double cost, MaintenanceStatus status) {
-        super(id, createdAt, updatedAt);
-        this.vehicle = vehicle;
-        this.serviceType = serviceType;
-        this.description = description;
-        this.cost = cost;
-        this.status = status;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getCost() {
-        return cost;
-    }
-
-    public void setCost(Double cost) {
-        this.cost = cost;
-    }
-
-    public MaintenanceStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(MaintenanceStatus status) {
-        this.status = status;
-    }
 }
