@@ -1,0 +1,25 @@
+package com.TransitOps.backend.repository;
+
+import com.TransitOps.backend.entity.Vehicle;
+import com.TransitOps.backend.entity.VehicleStatus;
+import com.TransitOps.backend.entity.VehicleType;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
+
+    Optional<Vehicle> findByRegistrationNumber(String registrationNumber);
+
+    boolean existsByRegistrationNumber(String registrationNumber);
+
+    List<Vehicle> findByStatus(VehicleStatus status);
+
+    List<Vehicle> findByVehicleType(VehicleType vehicleType);
+
+    List<Vehicle> findByModelContainingIgnoreCase(String model);
+
+}
