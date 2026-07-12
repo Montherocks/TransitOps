@@ -119,27 +119,15 @@ public class FuelServiceImpl implements FuelService {
     @Transactional(readOnly = true)
     public FuelStatisticsDTO getStatistics(){
 
-        long totalLogs = fuelRepository.count();
-
-        Double totalFuel = fuelRepository.findAll()
-                .stream()
-                .mapToDouble(FuelLog::getLiters)
-                .sum();
-
-        BigDecimal totalCost = fuelRepository.findAll()
-                .stream()
-                .map(FuelLog::getCost)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        Double averageFuel = totalLogs == 0
-                ? 0.0
-                : totalFuel / totalLogs;
-
         return FuelStatisticsDTO.builder()
-                .totalLogs(totalLogs)
-                .totalFuelConsumed(totalFuel)
-                .totalFuelCost(totalCost)
-                .averageFuelPerLog(averageFuel)
+                .totalLogs(fuelRepository.getTotalLogs())
+                .totalFuelConsumed(fuelRepository.getTotalFuel())
+                .totalFuelCost(fuelRepository.getTotalCost())
+                .averageFuelPerLog(
+                        fuelRepository.getTotalLogs() == 0
+                                ? 0.0
+                                : fuelRepository.getTotalFuel() / fuelRepository.getTotalLogs()
+                )
                 .build();
 
     }
