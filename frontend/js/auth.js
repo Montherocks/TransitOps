@@ -20,7 +20,7 @@ function isAuthenticated() {
 function requireAuthentication() {
 
     if (!isAuthenticated()) {
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     }
 }
 
@@ -49,7 +49,7 @@ async function logoutUser() {
         console.error(error);
     } finally {
         clearAuthentication();
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     }
 }
 
