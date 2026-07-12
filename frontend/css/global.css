@@ -144,3 +144,30 @@ transform:translateY(-2px);
 .card:hover{
 transform:translateY(-3px);
 }
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.profile{
+    background:#1f2937;
+    padding:10px 14px;
+    border-radius:8px;
+    color:white;
+}
+
+.logout-btn{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.logout-btn:hover{
+    background:#dc2626;
+}
