@@ -1,5 +1,6 @@
 package com.TransitOps.backend.service;
 
+import com.TransitOps.backend.dto.VehicleStatusUpdateDTO;
 import com.TransitOps.backend.dto.VehicleRequest;
 import com.TransitOps.backend.dto.VehicleResponse;
 import com.TransitOps.backend.entity.Vehicle;
