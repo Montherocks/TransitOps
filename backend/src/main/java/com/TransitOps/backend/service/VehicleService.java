@@ -129,17 +129,5 @@ public class VehicleService {
                 .map(this::mapToResponse)
                 .toList();
     }
-    public VehicleResponse updateVehicleStatus(Long id, VehicleStatusUpdateDTO request) {
-
-        Vehicle vehicle = vehicleRepository.findById(id)
-            .orElseThrow(() ->
-                new RuntimeException("Vehicle not found."));
-
-        vehicle.setStatus(request.getStatus());
-
-        Vehicle updatedVehicle = vehicleRepository.save(vehicle);
-
-        return mapToResponse(updatedVehicle);
-    }
 
 }
