@@ -1,28 +1,53 @@
 package com.TransitOps.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.Builder;
 
 import java.time.LocalDate;
 
+@Builder
 @Entity
-@Table(name = "drivers")
+@Table(
+        name = "drivers",
+        indexes = {
+                @Index(name = "idx_driver_license", columnList = "licenseNumber"),
+                @Index(name = "idx_driver_phone", columnList = "phoneNumber")
+        }
+)
 public class Driver extends BaseEntity {
 
+    @NotBlank(message = "Driver name is required")
+    @Column(nullable = false)
     private String fullName;
 
-    @Column(unique = true)
+    @NotBlank(message = "License number is required")
+    @Column(nullable = false, unique = true)
     private String licenseNumber;
 
+    @NotBlank(message = "License category is required")
+    @Column(nullable = false)
     private String licenseCategory;
 
+    @Future(message = "License expiry must be a future date")
+    @Column(nullable = false)
     private LocalDate licenseExpiry;
 
+    @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^[6-9]\\d{9}$",
+            message = "Phone number must be valid")
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    private Integer safetyScore;
+    @Min(value = 0)
+    @Max(value = 100)
+    @Builder.Default
+    private Integer safetyScore = 100;
 
     @Enumerated(EnumType.STRING)
-    private DriverStatus status;
+    @Column(nullable = false)
+    @Builder.Default
+    private DriverStatus status = DriverStatus.AVAILABLE;
 
     public Driver() {
     }
