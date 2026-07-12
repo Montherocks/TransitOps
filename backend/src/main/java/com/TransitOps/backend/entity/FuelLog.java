@@ -1,85 +1,42 @@
 package com.TransitOps.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "fuel_logs")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class FuelLog extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trip_id")
     private Trip trip;
 
-    private Double liters;
-
-    private Double cost;
-
+    @Column(nullable = false)
     private LocalDate fuelDate;
 
-    public FuelLog(Vehicle vehicle, Trip trip, Double liters, Double cost, LocalDate fuelDate) {
-        this.vehicle = vehicle;
-        this.trip = trip;
-        this.liters = liters;
-        this.cost = cost;
-        this.fuelDate = fuelDate;
-    }
+    @Positive(message = "Fuel quantity must be greater than zero")
+    @Column(nullable = false)
+    private Double liters;
 
-    public FuelLog(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, Vehicle vehicle, Trip trip, Double liters, Double cost, LocalDate fuelDate) {
-        super(id, createdAt, updatedAt);
-        this.vehicle = vehicle;
-        this.trip = trip;
-        this.liters = liters;
-        this.cost = cost;
-        this.fuelDate = fuelDate;
-    }
+    @Positive(message = "Fuel cost must be greater than zero")
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal cost;
 
-    public FuelLog() {
-    }
+    @NotBlank(message = "Fuel station is required")
+    @Column(nullable = false)
+    private String fuelStation;
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public Trip getTrip() {
-        return trip;
-    }
-
-    public void setTrip(Trip trip) {
-        this.trip = trip;
-    }
-
-    public Double getLiters() {
-        return liters;
-    }
-
-    public void setLiters(Double liters) {
-        this.liters = liters;
-    }
-
-    public Double getCost() {
-        return cost;
-    }
-
-    public void setCost(Double cost) {
-        this.cost = cost;
-    }
-
-    public LocalDate getFuelDate() {
-        return fuelDate;
-    }
-
-    public void setFuelDate(LocalDate fuelDate) {
-        this.fuelDate = fuelDate;
-    }
 }

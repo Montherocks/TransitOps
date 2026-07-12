@@ -115,6 +115,37 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(response);
     }
 
+    @ExceptionHandler(FuelLogNotFoundException.class)
+    public ResponseEntity<ErrorResponseDTO> fuelNotFound(FuelLogNotFoundException ex, HttpServletRequest request)
+    {
+
+        ErrorResponseDTO response = ErrorResponseDTO.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .error("NOT FOUND")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+
+    }
+
+    @ExceptionHandler(InvalidFuelLogException.class)
+    public ResponseEntity<ErrorResponseDTO> invalidFuel(InvalidFuelLogException ex, HttpServletRequest request){
+
+        ErrorResponseDTO response = ErrorResponseDTO.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .error("BAD REQUEST")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.badRequest().body(response);
+
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleException(Exception ex, HttpServletRequest request){
 
