@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Drivers & Safety</title>
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/drivers.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+    <div class="logo">
+        TransitOps
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+
+        <li>
+            <a href="fleet.html">Fleet</a>
+        </li>
+
+        <li class="active">
+            <a href="drivers.html">Drivers</a>
+        </li>
+
+        <li>
+            <a href="trips.html">Trips</a>
+        </li>
+
+        <li>
+            <a href="maintenance.html">Maintenance</a>
+        </li>
+
+        <li>
+            <a href="expenses.html">Fuel & Expenses</a>
+        </li>
+
+        <li>
+            <a href="analytics.html">Analytics</a>
+        </li>
+
+        <li>
+            <a href="settings.html">Settings</a>
+        </li>
+
+    </ul>
+
+</aside>
+
+    <main class="main">
+
+        <header class="navbar">
+
+            <h2>Drivers & Safety</h2>
+
+            <button class="btn">
+                + Add Driver
+            </button>
+
+        </header>
+
+        <section class="content">
+
+            <div class="filters">
+
+                <input
+                    type="text"
+                    placeholder="Search Driver"
+                    id="searchDriver"
+                >
+
+                <select>
+                    <option>License Status</option>
+                </select>
+
+                <select>
+                    <option>Compliance</option>
+                </select>
+
+            </div>
+
+            <div class="card">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Driver ID</th>
+                        <th>Name</th>
+                        <th>License Expiry</th>
+                        <th>Compliance</th>
+                        <th>Assigned Vehicle</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="driverTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="js/drivers.js"></script>
+
+</body>
+</html>

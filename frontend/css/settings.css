@@ -1,0 +1,27 @@
+.settings-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+form input{
+padding:12px;
+background:#1f2937;
+border:1px solid #334155;
+color:white;
+border-radius:8px;
+}
+
+@media(max-width:900px){
+
+.settings-grid{
+grid-template-columns:1fr;
+}
+
+}
