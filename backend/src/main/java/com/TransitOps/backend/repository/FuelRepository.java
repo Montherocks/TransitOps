@@ -1,6 +1,8 @@
 package com.TransitOps.backend.repository;
 
 import com.TransitOps.backend.entity.FuelLog;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -14,5 +16,7 @@ public interface FuelRepository extends JpaRepository<FuelLog, Long>, JpaSpecifi
     List<FuelLog> findByTripId(Long tripId);
 
     List<FuelLog> findByFuelDateBetween(LocalDate from, LocalDate to);
+
+    Page<FuelLog> findByVehicleId(Long vehicleId, Pageable pageable);
 
 }
