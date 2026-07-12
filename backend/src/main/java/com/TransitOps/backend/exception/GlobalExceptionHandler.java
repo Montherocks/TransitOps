@@ -55,13 +55,9 @@ public class GlobalExceptionHandler {
         Map<String,String> errors = new HashMap<>();
 
         ex.getBindingResult().getAllErrors().forEach(error -> {
-
             String field=((FieldError)error).getField();
-
             String message=error.getDefaultMessage();
-
             errors.put(field,message);
-
         });
 
         ErrorResponseDTO response=ErrorResponseDTO.builder()
@@ -77,6 +73,48 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(MaintenanceNotFoundException.class)
+    public ResponseEntity<ErrorResponseDTO> maintenanceNotFound(MaintenanceNotFoundException ex, HttpServletRequest request){
+
+        ErrorResponseDTO response= ErrorResponseDTO.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .error("NOT FOUND")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(VehicleAlreadyInMaintenanceException.class)
+    public ResponseEntity<ErrorResponseDTO> vehicleAlreadyInMaintenance(VehicleAlreadyInMaintenanceException ex, HttpServletRequest request){
+
+        ErrorResponseDTO response=ErrorResponseDTO.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .error("CONFLICT")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
+    @ExceptionHandler(MaintenanceAlreadyCompletedException.class)
+    public ResponseEntity<ErrorResponseDTO> alreadyCompleted(MaintenanceAlreadyCompletedException ex, HttpServletRequest request){
+
+        ErrorResponseDTO response=ErrorResponseDTO.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .error("BAD REQUEST")
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.badRequest().body(response);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleException(Exception ex, HttpServletRequest request){
 
@@ -88,8 +126,7 @@ public class GlobalExceptionHandler {
                 .path(request.getRequestURI())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(response);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 
     }
 
