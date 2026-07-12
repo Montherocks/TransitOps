@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Service
 @RequiredArgsConstructor
@@ -118,25 +119,18 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Transactional(readOnly = true)
     public ExpenseStatisticsDTO getStatistics(){
 
-        long totalExpenses = expenseRepository.count();
+        Long total = expenseRepository.getTotalExpenses();
 
-        BigDecimal totalAmount = expenseRepository.findAll()
-                .stream()
-                .map(Expense::getAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal amount = expenseRepository.getTotalExpenseAmount();
 
-        BigDecimal averageExpense = totalExpenses == 0
+        BigDecimal average = total == 0
                 ? BigDecimal.ZERO
-                : totalAmount.divide(
-                BigDecimal.valueOf(totalExpenses),
-                2,
-                java.math.RoundingMode.HALF_UP
-        );
+                : amount.divide(BigDecimal.valueOf(total), 2, RoundingMode.HALF_UP);
 
         return ExpenseStatisticsDTO.builder()
-                .totalExpenses(totalExpenses)
-                .totalExpenseAmount(totalAmount)
-                .averageExpense(averageExpense)
+                .totalExpenses(total)
+                .totalExpenseAmount(amount)
+                .averageExpense(average)
                 .build();
 
     }
