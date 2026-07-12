@@ -22,4 +22,6 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 
     List<Trip> findByDestinationContainingIgnoreCase(String destination);
 
+    long countByStatus(TripStatus status);
+
 }

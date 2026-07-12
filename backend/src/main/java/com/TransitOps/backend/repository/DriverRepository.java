@@ -27,4 +27,6 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
 
     Page<Driver> findByLicenseExpiryBefore(LocalDate date, Pageable pageable);
 
+    long countByStatus(DriverStatus status);
+
 }
