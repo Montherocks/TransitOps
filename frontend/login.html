@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TransitOps Login</title>
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-left">
+
+        <div class="brand">
+
+            <h1>TransitOps</h1>
+
+            <p>
+                Smart Transport Operations Platform
+            </p>
+
+        </div>
+
+        <div class="features">
+
+            <div class="feature-card">
+                Fleet Management
+            </div>
+
+            <div class="feature-card">
+                Dispatch Operations
+            </div>
+
+            <div class="feature-card">
+                Driver Compliance
+            </div>
+
+            <div class="feature-card">
+                Maintenance Tracking
+            </div>
+
+            <div class="feature-card">
+                Expense Monitoring
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="login-right">
+
+        <div class="login-card">
+
+            <h2>
+                Sign In
+            </h2>
+
+            <form id="loginForm">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email Address"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    required
+                >
+
+                <select id="role">
+
+                    <option value="">
+                        Select Role
+                    </option>
+
+                    <option>
+                        Fleet Manager
+                    </option>
+
+                    <option>
+                        Dispatcher
+                    </option>
+
+                    <option>
+                        Safety Officer
+                    </option>
+
+                    <option>
+                        Financial Analyst
+                    </option>
+
+                </select>
+
+                <div class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                    >
+
+                    <label for="remember">
+                        Remember Me
+                    </label>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn login-btn"
+                >
+                    Login
+                </button>
+
+            </form>
+
+            <p id="errorMessage"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+
+</html>

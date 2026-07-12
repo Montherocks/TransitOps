@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TransitOps Dashboard</title>
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+    <div class="logo">
+        TransitOps
+    </div>
+
+    <ul class="menu">
+
+        <li class="active">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+
+        <li>
+            <a href="fleet.html">Fleet</a>
+        </li>
+
+        <li>
+            <a href="drivers.html">Drivers</a>
+        </li>
+
+        <li>
+            <a href="trips.html">Trips</a>
+        </li>
+
+        <li>
+            <a href="maintenance.html">Maintenance</a>
+        </li>
+
+        <li>
+            <a href="expenses.html">Fuel & Expenses</a>
+        </li>
+
+        <li>
+            <a href="analytics.html">Analytics</a>
+        </li>
+
+        <li>
+            <a href="settings.html">Settings</a>
+        </li>
+
+    </ul>
+
+</aside>
+
+    <main class="main">
+
+        <header class="navbar">
+
+            <input
+                type="text"
+                placeholder="Search..."
+                class="search"
+            >
+
+            <div class="profile" id="profileRole">
+            User
+            </div>
+
+        </header>
+
+        <section class="content">
+
+            <div class="filters">
+
+                <select id="vehicleType">
+                    <option>All Vehicles</option>
+                </select>
+
+                <select id="status">
+                    <option>All Status</option>
+                </select>
+
+                <select id="region">
+                    <option>All Regions</option>
+                </select>
+
+            </div>
+
+            <div id="statsContainer" class="stats-grid">
+            </div>
+
+            <div class="dashboard-grid">
+
+                <div class="card">
+
+                    <h3>
+                        Recent Trips
+                    </h3>
+
+                    <table>
+
+                        <thead>
+                        <tr>
+                            <th>Trip</th>
+                            <th>Vehicle</th>
+                            <th>Driver</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="tripTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>
+                        Vehicle Status
+                    </h3>
+
+                    <div id="vehicleStatus">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

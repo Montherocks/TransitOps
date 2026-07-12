@@ -1,0 +1,58 @@
+.filters{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.filters input,
+.filters select{
+
+    background:#1f2937;
+    color:white;
+
+    border:1px solid #334155;
+
+    padding:12px;
+    border-radius:8px;
+}
+
+.status{
+
+    padding:6px 12px;
+    border-radius:20px;
+
+    font-size:12px;
+}
+
+.available{
+    background:#22c55e22;
+    color:#22c55e;
+}
+
+.trip{
+    background:#3b82f622;
+    color:#3b82f6;
+}
+
+.shop{
+    background:#f59e0b22;
+    color:#f59e0b;
+}
+
+.retired{
+    background:#ef444422;
+    color:#ef4444;
+}
+
+.action-btn{
+
+    padding:8px 12px;
+    border:none;
+
+    border-radius:8px;
+    cursor:pointer;
+
+    background:#334155;
+    color:white;
+}

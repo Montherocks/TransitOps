@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports & Analytics</title>
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/analytics.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+<aside class="sidebar">
+
+    <div class="logo">
+        TransitOps
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+
+        <li>
+            <a href="fleet.html">Fleet</a>
+        </li>
+
+        <li>
+            <a href="drivers.html">Drivers</a>
+        </li>
+
+        <li>
+            <a href="trips.html">Trips</a>
+        </li>
+
+        <li>
+            <a href="maintenance.html">Maintenance</a>
+        </li>
+
+        <li>
+            <a href="expenses.html">Fuel & Expenses</a>
+        </li>
+
+        <li class="active">
+            <a href="analytics.html">Analytics</a>
+        </li>
+
+        <li>
+            <a href="settings.html">Settings</a>
+        </li>
+
+    </ul>
+
+</aside>
+
+<main class="main">
+
+<header class="navbar">
+
+<h2>
+Reports & Analytics
+</h2>
+
+<button class="btn">
+Export Report
+</button>
+
+</header>
+
+<section class="content">
+
+<div class="analytics-grid">
+
+<div class="card">
+
+<h3>
+Fleet Utilization
+</h3>
+
+<canvas id="utilizationChart"></canvas>
+
+</div>
+
+<div class="card">
+
+<h3>
+Monthly Expenses
+</h3>
+
+<canvas id="expenseChart"></canvas>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>
+Operational KPIs
+</h3>
+
+<div class="kpi-grid">
+
+<div class="kpi-card">
+<h2>--</h2>
+<p>Fleet Efficiency</p>
+</div>
+
+<div class="kpi-card">
+<h2>--</h2>
+<p>On-Time Deliveries</p>
+</div>
+
+<div class="kpi-card">
+<h2>--</h2>
+<p>Fuel Efficiency</p>
+</div>
+
+<div class="kpi-card">
+<h2>--</h2>
+<p>Driver Compliance</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/analytics.js"></script>
+
+</body>
+
+</html>

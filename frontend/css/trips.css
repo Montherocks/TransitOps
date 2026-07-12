@@ -1,0 +1,35 @@
+.trip-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+form input,
+form select{
+padding:12px;
+border-radius:8px;
+border:1px solid #334155;
+background:#1f2937;
+color:white;
+}
+
+.trip-card{
+padding:15px;
+margin-bottom:15px;
+background:#111827;
+border-radius:10px;
+}
+
+@media(max-width:900px){
+
+.trip-grid{
+grid-template-columns:1fr;
+}
+
+}
