@@ -8,6 +8,7 @@ import com.TransitOps.backend.entity.Maintenance;
 import com.TransitOps.backend.entity.MaintenanceStatus;
 import com.TransitOps.backend.entity.Vehicle;
 import com.TransitOps.backend.entity.VehicleStatus;
+import com.TransitOps.backend.exception.MaintenanceAlreadyCompletedException;
 import com.TransitOps.backend.exception.MaintenanceNotFoundException;
 import com.TransitOps.backend.exception.VehicleAlreadyInMaintenanceException;
 import com.TransitOps.backend.mapper.MaintenanceMapper;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -116,23 +118,24 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
-    public MaintenanceResponseDTO completeMaintenance(Long id) {
+    public MaintenanceResponseDTO completeMaintenance(Long id){
 
-        Maintenance maintenance = maintenanceRepository.findById(id).orElseThrow(() -> new MaintenanceNotFoundException("Maintenance not found"));
+        Maintenance maintenance = maintenanceRepository.findById(id)
+                        .orElseThrow(() -> new MaintenanceNotFoundException("Maintenance not found"));
+
+        if(maintenance.getStatus()==MaintenanceStatus.COMPLETED){
+            throw new MaintenanceAlreadyCompletedException("Maintenance is already completed.");
+        }
 
         maintenance.setStatus(MaintenanceStatus.COMPLETED);
-        maintenance.setCompletedDate(java.time.LocalDate.now());
+        maintenance.setCompletedDate(LocalDate.now());
         Vehicle vehicle = maintenance.getVehicle();
-        if (vehicle.getStatus() != VehicleStatus.RETIRED) {
+        if(vehicle.getStatus()!=VehicleStatus.RETIRED){
 
             vehicle.setStatus(VehicleStatus.AVAILABLE);
             vehicleRepository.save(vehicle);
-
         }
-        Maintenance updated = maintenanceRepository.save(maintenance);
-
-        return MaintenanceMapper.toDTO(updated);
-
+        return MaintenanceMapper.toDTO(maintenanceRepository.save(maintenance));
     }
 
     @Override
